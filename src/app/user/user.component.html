@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Dashboard Template · Bootstrap v5.1</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <!-- <link href="dashboard.css" rel="stylesheet"> -->
+</head>
+
+<body style="background-color: rgb(212, 247, 229);">
+  <nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+      <h2>User Section</h2>
+      <div class="d-flex">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Search
+          Flight</button>&nbsp;
+          <button type="button" class="btn btn-info" [routerLink]="['']">Logout</button>
+      </div>
+    </div>
+  </nav><br><br>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">flightId</th>
+          <th scope="col">flightName</th>
+          <th scope="col">Source</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Date</th>
+          <th scope="col">Fare</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of flights">
+          <td>{{flight.flightId}}</td>
+          <td>{{flight.flightName}}</td>
+          <td>{{flight.flightFrom}}</td>
+          <td>{{flight.flightTo}}</td>
+          <td>{{flight.date}}</td>
+          <td>{{flight.fare}}</td>
+          <td>
+
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Modal"(click)="onEditflight(flight)">Book</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Search Flight</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="formvalue">
+
+
+              <div class="mb-3">
+                <label class="form-label">Source</label>
+                <input type="text" formControlName="flightFrom" class="form-control" placeholder="Enter Source"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Destination</label>
+                <input type="text" formControlName="flightTo" class="form-control" placeholder="Enter Destination"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="date" formControlName="date" class="form-control" placeholder="Select date"
+                  id="exampleInputPassword1">
+              </div>
+
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"  (click)="searchflight()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ----------------------------------------------------------------------------------Modal of book button------------------------------------------------ -->
+    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalLabel">Book Flight</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="form">
+
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" formControlName="email" class="form-control" placeholder="Enter Email"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">FirstName</label>
+                <input type="text" formControlName="firstname" class="form-control" placeholder="Enter FirstName"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">LastName</label>
+                <input type="text" formControlName="lastname" class="form-control" placeholder="Enter LastName"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <input type="text" formControlName="gender" class="form-control" placeholder="Gender"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Age</label>
+                <input type="number" formControlName="age" class="form-control" placeholder="Enter Age"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label  class="form-label">FlightId</label>
+                <input type="number" formControlName="flightId" class="form-control" placeholder="Enter Id" id="exampleInputEmail1" aria-describedby="emailHelp">
+                
+              </div>
+              <div class="mb-3">
+                <label class="form-label">FlightName</label>
+                <input type="text" formControlName="flightName" class="form-control" placeholder="Enter Age"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Source</label>
+                <input type="text" formControlName="flightFrom" class="form-control" placeholder="Enter Age"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Destination</label>
+                <input type="text" formControlName="flightTo" class="form-control" placeholder="Enter Age"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="date" formControlName="date" class="form-control" placeholder="Enter Age"
+                  id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Fare</label>
+                <input type="number" formControlName="fare" class="form-control" placeholder="Enter Age"
+                  id="exampleInputPassword1">
+              </div>
+
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" [routerLink]="['/booking']" (click)=bookflight()>Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+      integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+      integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+      crossorigin="anonymous"></script>
+    <script src="dashboard.js"></script>

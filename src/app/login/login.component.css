@@ -1,0 +1,15 @@
+.root{
+    width: 40%;
+    
+}
+
+@media (max-width: 960px) {
+    .root{
+         width: 75%
+    }
+}
+@media (max-width: 600px) {
+    .root{
+    width: 90%;
+    }
+}
